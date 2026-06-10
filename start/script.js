@@ -1,3 +1,4 @@
+import { calculateBMI, getJudgement } from "./functions.js";
 // 【Step 1】 基本的なDOM操作とイベント
 // HTMLの要素を取得して、定数に代入しよう
 // 例: const heightInput = document.getElementById('height');
@@ -15,8 +16,30 @@ const bmiResult = document.querySelector('p#bmi-result');
 // 計算履歴を表示する要素を取得
 const historyList = document.querySelector('ul#history-list');
 
-// 計算履歴保存用の配列
-const historyData = [];
+// 履歴一覧を描画する関数
+const renderHistory = () => {
+    historyList.innerHTML = '';
+    historyData.forEach((history) => {
+        const liElm = document.createElement('li');
+        liElm.className = 'list-group-item d-flex justify-content-between align-items-center';
+        liElm.innerHTML = `<span class="text-muted small">${new Date(history.date).toLocaleString('ja-JP')}</span>
+        <span>BMI: ${history.bmi}</span>
+        <span>${history.judge}</span>`;
+        historyList.appendChild(liElm);
+    });
+};
+
+// 計算履歴保存用の配列（localStorageからデータを読み込み）
+const savedData = localStorage.getItem('bmiHistory');
+
+// 三項（条件）演算子
+let historyData = savedData ? JSON.parse(savedData) : [];
+// if(savedData) {
+//     historyData = JSON.parse(savedData);
+// };
+
+// ページを開いたときに履歴を表示
+renderHistory();
 
 // 「計算する」ボタンがクリックされたときの処理を追加しよう
 // 例: calcBtn.addEventListener('click', () => { ... });
@@ -40,13 +63,9 @@ if(isNaN(heightValue) || isNaN(weightValue)) {
     alert('身長と体重は半角数字で入力してください。');
     return; // プログラムを終了させる
 }
-// 身長の単位を変換
-const convertedHeightValue = heightValue / 100;
-
 console.log(weightValue);
 // 7.BMIを計算する(体重[kg] ÷ (身長[m] × 身長[m]))
-const bmi = Math.round(weightValue / (convertedHeightValue * convertedHeightValue) * 100 ) / 100;
-console.log(bmi);
+const bmi = calculateBMI(heightValue,weightValue);
 // 8.計算結果をbmiResultに表示
 bmiResult.innerText = bmi;
 
@@ -55,20 +74,10 @@ bmiResult.innerText = bmi;
 // document.getElementById('ID属性の値')
 const judgeResult = document.getElementById('judgment-result');
 console.log(judgeResult);
-// 2.BMIの値を基に肥満度を判定
-let judgeResultText = '';
-if (bmi < 18.5) {
-    console.log('低体重');
-    judgeResultText = '低体重';
-} else if (bmi <25) {
-    console.log('普通体重');
-    judgeResultText = '普通体重';
-} else {
-    console.log('肥満');
-    judgeResultText = '肥満';
-}
-// 3.判定結果を画面に表示
-judgeResult.innerText = judgeResultText;
+
+// 2.判定結果を画面に表示
+const judgeInfo = getJudgement(bmi);
+judgeResult.innerText = judgeInfo;
 
 
 // 追加機能3：計算履歴の表示 （historyDataという配列を作って中に計算履歴を入れる）
@@ -85,22 +94,16 @@ const sec = String(today.getSeconds()).padStart(2,'0');
 console.log(year, month, date, hour, min, sec);
 const newRecord = {
     bmi:bmi,
-    judge:judgeResultText,
-    date:`${year}-${month}-${date}-${hour}-${min}-${sec}`,
+    judge:judgeInfo,
+    date:`${year}-${month}-${date}T${hour}:${min}:${sec}`,
 }
-// 2.履歴の配列にオブジェクトを入れる
+// 2-1.履歴の配列にオブジェクトを入れる
 historyData.unshift(newRecord);
 console.log(historyData);
+// 2-2.historyDataをbmiHistoryというキーでlocalStorageに保存
+localStorage.setItem('bmiHistory', JSON.stringify(historyData))
 // 3.履歴一覧を画面に表示する
-historyList.innerHTML = '';
-for(let history of historyData) {
-    const liElm = document.createElement('li');
-    liElm.className = 'list-group-item d-flex justify-content-between align-items-center';
-    liElm.innerHTML = `<span class="text-muted small">${new Date(history.date).toLocaleString('ja-JP')}</span>
-    <span>BMI: ${history.bmi}</span>
-    <span>${history.judge}</span>`;
-    historyList.appendChild(liElm);
-}
+renderHistory();
 });
 
 
