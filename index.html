@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI計算アプリ | My BMI</title>
+  <!-- ファビコン -->
+  <link rel="icon" href="img/favicon.ico">
+  <!-- オリジナルCSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title"><img src="img/logo.png" alt="My BMIのロゴ"></h1>
+    <!-- 入力フォームエリア -->
+      <div class="card-input">
+          <label for="height">身長 (cm)</label>
+          <input type="number" id="height" placeholder="例: 170">
+          <label for="weight">体重 (kg)</label>
+          <input type="number" id="weight" placeholder="例: 65">
+          <button id="calc-btn" class="btn-app">計算する</button>
+      </div>
+
+    <!-- 結果表示エリア -->
+    <div class="card-result">
+        <h2>計算結果</h2>
+        <p id="bmi-result">--</p>
+        <p id="judgment-result">身長と体重を入力して計算ボタンを押してください。</p>
+    </div>
+
+    <!-- おすすめ書籍の表示エリア（初期状態は非表示） -->
+    <div id="books-section">
+        <h2>おすすめの書籍</h2>
+        <div id="books-list"></div>
+    </div>
+
+    <!-- 計算履歴エリア -->
+    <div class="card-history">
+      <div class="history-header">
+        <h2>計算履歴</h2>
+        <button id="clear-btn">履歴を削除</button>
+      </div>
+      <ul id="history-list">
+      <!-- 履歴をここに追加 -->
+      </ul>
+    </div>
+  </div>
+
+  <script src="js/script.js" type="module"></script>
+</body>
+</html>

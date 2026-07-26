@@ -1,0 +1,304 @@
+@charset "UTF-8";
+
+/* 共通部分 */
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+body {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  color: #1B1E24;
+  background: #f4fBf8;
+  font-size: 1rem;
+  padding: 24px 12px;
+  margin: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+li {
+    list-style-type: none;
+}
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+.title {
+  text-align: center;
+  height: auto;
+}
+.title img {
+  width: 58%;
+  max-width: 260px;
+  height: auto;
+}
+.card-input,
+.card-result,
+.card-history,
+#books-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,184,148,0.08);
+  margin-bottom: 24px;
+}
+.card-result h2,
+#books-section h2,
+.card-history h2 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+/* ボタン */
+.btn-app {
+  width: 100%;
+  background: #00B894;
+  color: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,184,148,0.25);
+  transition: 0.1s ease;
+}
+.btn-app:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0,184,148,0.18);
+}
+
+/* 入力欄 */
+.card-input label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B1E24;
+  margin-bottom: 6px;
+}
+.card-input input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #b7ede1;
+  background-color: #f4fbf8;
+  margin-bottom: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.card-input input:focus {
+  outline: none;
+  border-color: #00B894;
+  box-shadow: 0 0 0 2px rgba(0,184,148,0.25);
+}
+
+/* 結果表示 */
+#bmi-result {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #00B894;
+  margin: 4px 0 8px;
+}
+#judgment-result {
+  text-align: center;
+  font-size: 15px;
+  color: #4A6F66;
+}
+
+/* おすすめの書籍表示 */
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  background: #f4fbf8;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,184,148,0.08);
+  color: #4A6F66;
+  margin-bottom: 12px;
+}
+.book-img {
+  width: 100px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.book-item {
+  flex: 1;
+}
+.book-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.book-desc {
+  font-size: 13px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.book-link {
+  display: inline-block;
+  font-size: 14px;
+  color: #00B894;
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,184,148,0.25);
+  transition: 0.15s ease;
+}
+.book-link:hover {
+  opacity: 0.8;
+  box-shadow: 0 2px 6px rgba(0,184,148,0.18);
+}
+
+/* 計算履歴 */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+#clear-btn {
+  background: transparent;
+  border: 1px solid #00B894;
+  color: #00B894;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: .2s;
+}
+#clear-btn:hover {
+  background: #00B894;
+  color: #fff;
+}
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4fbf8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #4A6F66;
+}
+.history-date {
+  flex: 1.2;
+  text-align: left;
+}
+.history-bmi {
+  flex: 0.8;
+  text-align: center;
+}
+.history-judge {
+  flex: 0.8;
+  text-align: right;
+}
+
+@media (min-width: 900px) {
+  /* 共通部分 */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .card-input,
+  .card-result,
+  .card-history,
+  #books-section {
+    padding: 32px 40px;
+  }
+  .card-result h2,
+  #books-section h2,
+  .card-history h2 {
+    margin: 0 0 16px 0;
+  }
+  /* おすすめの書籍表示 */
+  #books-section {
+    margin: 0 auto;
+    padding: 24px 40px;
+    margin-bottom: 40px;
+  }
+  #books-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .book-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    border-radius: 14px;
+    margin: 0;
+  }
+  .book-img {
+    width: 180px;
+    height: 200px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    object-fit: contain;
+  }
+  .book-item {
+    text-align: center;
+  }
+  .book-title {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .book-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    min-height: 48px; 
+  }
+  .book-link {
+    font-size: 15px;
+    padding: 10px 18px;
+    border-radius: 12px;
+  }
+  /* 計算履歴 */
+  .card-history {
+    padding: 24px 40px;
+  }
+  #history-list {
+    margin-top: 12px;
+  }
+  .history-item {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 0.6fr;
+    align-items: center;
+    background: #f4fbf8;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #4A6F66;
+  }
+  .history-date {
+    text-align: left;
+  }
+  .history-bmi {
+    text-align: center;
+  }
+  .history-judge {
+    text-align: right;
+    font-weight: bold;
+  }
+}
