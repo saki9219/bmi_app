@@ -115,4 +115,4 @@ JavaScriptによる計算処理や条件分岐、LocalStorageを利用したデ�
 
 ## ⏱ 制作期間
 
-2日
+2日間
